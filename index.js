@@ -15,17 +15,11 @@ app.use(cors());
 
 const vapidKeys = webpush.generateVAPIDKeys();
 
-webpush.setGCMAPIKey(process.env.APPLICATION_SERVER_PUBLIC_KEY);
 /*webpush.setVapidDetails(
   'mailto:${process.env.MAIL}',
   vapidKeys.publicKey,
   vapidKeys.privateKey
 );*/
-webpush.setVapidDetails(
-  'mailto:${process.env.MAIL}',
-  process.env.VAPID_PUBLIC_KEY,
-  process.env.VAPID_PRIVATE_KEY
-);
 
 
 app.get('/', (req, res) => {
@@ -44,6 +38,13 @@ app.post('/subscribe', (req, res) => {
       p256dh: subscription.subscription.keys.p256dh
     }
   }
+  
+  webpush.setGCMAPIKey(subscription.applitacionKeys.public);
+  webpush.setVapidDetails(
+    'mailto:${process.env.MAIL}',
+    subscription.applicationKeys.public,
+    subscription.applicationKeys.private
+  );
 
   console.log("Push sub");
   console.log(pushSubscription);

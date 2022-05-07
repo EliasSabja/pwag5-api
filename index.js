@@ -22,14 +22,11 @@ webpush.setVapidDetails(
 
 
 app.get('/', (req, res) => {
-  console.log(vapidKeys);
-  res.send('Express + TypeScript Server full speed');
+  res.send('');
 });
 
 app.post('/subscribe', (req, res) => {
-  
   const subscription = req.body;
-  console.log(subscription);
   const pushSubscription = {
     endpoint: subscription.endpoint,
     keys: {
@@ -37,10 +34,6 @@ app.post('/subscribe', (req, res) => {
       p256dh: subscription.keys.p256dh
     }
   }
-   
-  console.log("Push sub");
-  console.log(pushSubscription);
-
   webpush.sendNotification(pushSubscription, subscription.msg);
   res.send("Subscription recieved");
 });

@@ -26,15 +26,13 @@ app.get('/', (req, res) => {
   res.send('Express + TypeScript Server full speed');
 });
 
-app.get('/subscribe', (req, res) => {
+app.post('/subscribe', (req, res) => {
   
   const subscription = req.body;
 
-  res.status(201).json({});
+  console.log(subscription);
 
-  const payload = JSON.stringify({title: 'Section.io Push notification'});
-
-  webpush.sendNotification(subscription, payload).catch((err) => console.log(err));
+  res.send("Subscription recieved");
 });
 
 

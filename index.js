@@ -13,13 +13,12 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-const vapidKeys = webpush.generateVAPIDKeys();
-
-/*webpush.setVapidDetails(
+webpush.setGCMAPIKey(process.env.APPLICATION_SERVER_PUBLIC_KEY);
+webpush.setVapidDetails(
   'mailto:${process.env.MAIL}',
-  vapidKeys.publicKey,
-  vapidKeys.privateKey
-);*/
+  process.env.VAPID_PUBLIC_KEY,
+  process.env.VAPID_PRIVATE_KEY
+);
 
 
 app.get('/', (req, res) => {
@@ -38,14 +37,7 @@ app.post('/subscribe', (req, res) => {
       p256dh: subscription.keys.p256dh
     }
   }
-  
-  webpush.setGCMAPIKey(subscription.keys.public);
-  webpush.setVapidDetails(
-    'mailto:${process.env.MAIL}',
-    subscription.keys.public,
-    subscription.keys.private
-  );
-
+   
   console.log("Push sub");
   console.log(pushSubscription);
 

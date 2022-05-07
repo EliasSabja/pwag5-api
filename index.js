@@ -29,7 +29,8 @@ app.get('/', (req, res) => {
 app.post('/subscribe', (req, res) => {
   
   const subscription = req.body;
-
+  console.log(req);
+  console.log(req.body);
   console.log(subscription);
 
   res.send("Subscription recieved");

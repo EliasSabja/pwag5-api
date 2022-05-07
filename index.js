@@ -16,10 +16,15 @@ app.use(cors());
 const vapidKeys = webpush.generateVAPIDKeys();
 
 webpush.setGCMAPIKey(process.env.APPLICATION_SERVER_PUBLIC_KEY);
-webpush.setVapidDetails(
+/*webpush.setVapidDetails(
   'mailto:${process.env.MAIL}',
   vapidKeys.publicKey,
   vapidKeys.privateKey
+);*/
+webpush.setVapidDetails(
+  'mailto:${process.env.MAIL}',
+  process.env.VAPID_PUBLIC_KEY,
+  process.env.VAPID_PRIVATE_KEY
 );
 
 

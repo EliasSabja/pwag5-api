@@ -10,7 +10,7 @@ const webpush = require('web-push');
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const router = express_1.default.Router();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 app.use(cors());
 const vapidKeys = webpush.generateVAPIDKeys();
 webpush.setGCMAPIKey(process.env.APPLICATION_SERVER_PUBLIC_KEY);
@@ -23,7 +23,7 @@ app.get('/subscribe', (req, res) => {
     const subscription = req.body;
     res.status(201).json({});
     const payload = JSON.stringify({ title: 'Section.io Push notification' });
-    webpush.sendNotification(subscription, payload).catch(err => console.log(err));
+    webpush.sendNotification(subscription, payload).catch((err) => console.log(err));
 });
 app.listen(port, () => {
     console.log(`[server]: Server is running full speed at https://localhost:${port}`);

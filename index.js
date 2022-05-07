@@ -32,7 +32,18 @@ app.post('/subscribe', (req, res) => {
   
   const subscription = req.body;
   console.log(subscription);
-  webpush.sendNotification(subscription, 'Your Push Payload Text');
+  const pushSubscription = {
+    endpoint: subscription.subscription.endpoint,
+    keys: {
+      auth: subscription.subscription.keys.auth,
+      p256dh: subscription.subscription.keys.p256dh
+    }
+  }
+
+  console.log("Push sub");
+  console.log(pushSubscription);
+
+  webpush.sendNotification(pushSubscription, 'Desde la api');
   res.send("Subscription recieved");
 });
 

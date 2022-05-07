@@ -32,24 +32,24 @@ app.post('/subscribe', (req, res) => {
   const subscription = req.body;
   console.log(subscription);
   const pushSubscription = {
-    endpoint: subscription.subscription.endpoint,
+    endpoint: subscription.endpoint,
     keys: {
-      auth: subscription.subscription.keys.auth,
-      p256dh: subscription.subscription.keys.p256dh
+      auth: subscription.keys.auth,
+      p256dh: subscription.keys.p256dh
     }
   }
   
-  webpush.setGCMAPIKey(subscription.applicationKeys.public);
+  webpush.setGCMAPIKey(subscription.keys.public);
   webpush.setVapidDetails(
     'mailto:${process.env.MAIL}',
-    subscription.applicationKeys.public,
-    subscription.applicationKeys.private
+    subscription.keys.public,
+    subscription.keys.private
   );
 
   console.log("Push sub");
   console.log(pushSubscription);
 
-  webpush.sendNotification(pushSubscription, 'Desde la api');
+  webpush.sendNotification(pushSubscription, subscription.msg);
   res.send("Subscription recieved");
 });
 

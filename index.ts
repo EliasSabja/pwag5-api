@@ -35,7 +35,7 @@ app.get('/subscribe', (req: Request, res: Response) => {
 
   const payload = JSON.stringify({title: 'Section.io Push notification'});
 
-  webpush.sendNotification(subscription, payload).catch(err => console.log(err));
+  webpush.sendNotification(subscription, payload).catch((err: any) => console.log(err));
 });
 
 

@@ -7,9 +7,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
-    "start": "node index.ts",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.18.1",
-    "tsc": "^2.0.4",
     "web-push": "^3.5.0"
   },
   "devDependencies": {

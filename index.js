@@ -39,7 +39,7 @@ app.post('/subscribe', (req, res) => {
     }
   }
   
-  webpush.setGCMAPIKey(subscription.applitacionKeys.public);
+  webpush.setGCMAPIKey(subscription.applicationKeys.public);
   webpush.setVapidDetails(
     'mailto:${process.env.MAIL}',
     subscription.applicationKeys.public,

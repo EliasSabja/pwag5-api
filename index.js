@@ -6,9 +6,11 @@ const webpush = require('web-push');
 dotenv.config();
 
 const app = express();
+
 const router = express.Router();
 const port = process.env.PORT || 3000;
 
+app.use(express.json());
 app.use(cors());
 
 const vapidKeys = webpush.generateVAPIDKeys();
